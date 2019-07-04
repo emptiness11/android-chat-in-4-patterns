@@ -1,4 +1,4 @@
-package nju.androidchat.client.mvp0;
+package nju.androidchat.client.hw1;
 
 import java.util.List;
 
@@ -13,8 +13,6 @@ public interface Mvp0Contract {
         void sendMessage(String content);
 
         void receiveMessage(ClientMessage content);
-
-        boolean isImage(ClientMessage message);
 
         String getUsername();
 

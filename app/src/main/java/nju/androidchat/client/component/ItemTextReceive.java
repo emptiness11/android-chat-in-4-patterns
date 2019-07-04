@@ -3,6 +3,8 @@ package nju.androidchat.client.component;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,7 +40,7 @@ public class ItemTextReceive extends LinearLayout {
         else {
             inflate(context, R.layout.item_text_receive, this);
             this.textView = findViewById(R.id.chat_item_content_text);
-            String htmlFor02 =  "<img src='" + test+ "'>" ;
+            String htmlFor02 =  "<img src='" + text+ "'>" ;
             setText(Html.fromHtml(htmlFor02, new Html.ImageGetter(){
 
                 @Override
@@ -49,7 +51,7 @@ public class ItemTextReceive extends LinearLayout {
                             drawable.getIntrinsicHeight());
                     return drawable;
                 }
-            },null);
+            },null));
         }
     }
 

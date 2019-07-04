@@ -3,6 +3,8 @@ package nju.androidchat.client.component;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -54,7 +56,7 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
                             drawable.getIntrinsicHeight());
                     return drawable;
                 }
-            },null);
+            },null));
         }
     }
 

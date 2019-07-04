@@ -1,4 +1,4 @@
-package nju.androidchat.client.mvp0;
+package nju.androidchat.client.hw1;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import lombok.extern.java.Log;
 import nju.androidchat.client.ClientMessage;
@@ -23,6 +25,9 @@ import nju.androidchat.client.Utils;
 import nju.androidchat.client.component.ItemTextReceive;
 import nju.androidchat.client.component.ItemTextSend;
 import nju.androidchat.client.component.OnRecallMessageRequested;
+import nju.androidchat.client.mvp0.Mvp0Contract;
+import nju.androidchat.client.mvp0.Mvp0TalkModel;
+import nju.androidchat.client.mvp0.Mvp0TalkPresenter;
 
 @Log
 public class HW1TalkActivity extends AppCompatActivity implements Mvp0Contract.View, TextView.OnEditorActionListener, OnRecallMessageRequested {
@@ -73,14 +78,13 @@ public class HW1TalkActivity extends AppCompatActivity implements Mvp0Contract.V
         );
     }
 
-    @Override
     public boolean isImage(String img,String imgData){
         String IMAGE_URL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
         String pattern = "!\\[]\\{" + IMAGE_URL + "\\}";
-        boolean flag=Pattern.matches(pattern,img);
+        boolean flag= Pattern.matches(pattern,img);
         if (flag) {
             Pattern url = Pattern.compile(IMAGE_URL);
-            Matcher matcher = url.matcher(text);
+            Matcher matcher = url.matcher(imgData);
             if (matcher.find()) {
                 imgData = matcher.group();
                 return true;
