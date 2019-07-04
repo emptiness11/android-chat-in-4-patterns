@@ -26,14 +26,34 @@ public class ItemTextReceive extends LinearLayout {
     private OnRecallMessageRequested onRecallMessageRequested;
 
 
-    public ItemTextReceive(Context context, String text, UUID messageId) {
+    public ItemTextReceive(Context context, String text, UUID messageId,boolean isImage) {
         super(context);
         this.context = context;
-        inflate(context, R.layout.item_text_receive, this);
-        this.textView = findViewById(R.id.chat_item_content_text);
-        this.messageId = messageId;
-        setText(text);
+        if(!isImage) {
+            inflate(context, R.layout.item_text_receive, this);
+            this.textView = findViewById(R.id.chat_item_content_text);
+            this.messageId = messageId;
+            setText(text);
+        }
+        else {
+            inflate(context, R.layout.item_text_receive, this);
+            this.textView = findViewById(R.id.chat_item_content_text);
+            String htmlFor02 =  "<img src='" + test+ "'>" ;
+            setText(Html.fromHtml(htmlFor02, new Html.ImageGetter(){
+
+                @Override
+                public Drawable getDrawable(String source) {
+                    int id = Integer.parseInt(source);
+                    Drawable drawable = getResources().getDrawable(id, null);
+                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth() ,
+                            drawable.getIntrinsicHeight());
+                    return drawable;
+                }
+            },null);
+        }
     }
+
+
 
     public void init(Context context) {
 

@@ -24,16 +24,38 @@ public class ItemTextSend extends LinearLayout implements View.OnLongClickListen
     private UUID messageId;
     @Setter private OnRecallMessageRequested onRecallMessageRequested;
 
-    public ItemTextSend(Context context, String text, UUID messageId, OnRecallMessageRequested onRecallMessageRequested) {
+    public ItemTextSend(Context context, String text, UUID messageId, OnRecallMessageRequested onRecallMessageRequested,boolean isIamge) {
         super(context);
         this.context = context;
-        inflate(context, R.layout.item_text_send, this);
-        this.textView = findViewById(R.id.chat_item_content_text);
-        this.messageId = messageId;
-        this.onRecallMessageRequested = onRecallMessageRequested;
+        if(!isIamge) {
+            inflate(context, R.layout.item_text_send, this);
+            this.textView = findViewById(R.id.chat_item_content_text);
+            this.messageId = messageId;
+            this.onRecallMessageRequested = onRecallMessageRequested;
 
-        this.setOnLongClickListener(this);
-        setText(text);
+            this.setOnLongClickListener(this);
+            setText(text);
+        }
+        else {
+            inflate(context, R.layout.item_text_send, this);
+            this.textView = findViewById(R.id.chat_item_content_text);
+            this.messageId = messageId;
+            this.onRecallMessageRequested = onRecallMessageRequested;
+
+            this.setOnLongClickListener(this);
+            String htmlFor02 =  "<img src='" + text + "'>" ;
+            setText(Html.fromHtml(htmlFor02, new Html.ImageGetter(){
+
+                @Override
+                public Drawable getDrawable(String source) {
+                    int id = Integer.parseInt(source);
+                    Drawable drawable = getResources().getDrawable(id, null);
+                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth() ,
+                            drawable.getIntrinsicHeight());
+                    return drawable;
+                }
+            },null);
+        }
     }
 
     public String getText() {
